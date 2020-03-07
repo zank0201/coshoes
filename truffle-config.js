@@ -18,12 +18,12 @@
  *
  */
 
-// const HDWalletProvider = require('truffle-hdwallet-provider');
-// const infuraKey = "d565003f6b3047b4b1630a7c15312471";
+const HDWalletProvider = require('truffle-hdwallet-provider');
+const infuraKey = "d565003f6b3047b4b1630a7c15312471";
 
 // // const fs = require('fs');
-// const mnemonic = "girl scare there obtain wing category book puppy liberty lend retire pizza"
-// ;
+const mnemonic = "girl scare there obtain wing category book puppy liberty lend retire pizza"
+;
 
 module.exports = {
   /**
@@ -44,14 +44,14 @@ module.exports = {
      network_id: "*",       // Any network
     },
     
-  //   rinkeby: {
-  //     // you may have to add a , here
-  //           provider: () => new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/${infuraKey}`),
-  //           network_id: 4,
-  //           gas: 5500000,
+    rinkeby: {
+      // you may have to add a , here
+            provider: () => new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/${infuraKey}`),
+            network_id: 4,
+            gas: 5500000,
 
-  //   // ...
-  // },
+    // ...
+  },
 
   // Set default mocha options here, use special reporters etc.
   mocha: {

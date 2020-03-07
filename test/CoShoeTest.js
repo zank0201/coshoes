@@ -43,7 +43,7 @@ contract("CoShoe", function (accounts) {
         assert(shoeArray.sold, "sold is not set to true")
         //assert.equal(shoeArray.owner, accounts[2], "Transfer of ownership failed")
         //check that shoesold has been incremented
-        assert.equal(shoe_Sold, 2, "Shoes sold has not been updated")
+        assert.equal(shoe_Sold, 1, "Shoes sold has not been updated")
     })
 
     it('should revert if value given to buy shoe is not 0.5 ether', async function() {
@@ -56,20 +56,23 @@ contract("CoShoe", function (accounts) {
     // test if checkpurchases returns the correct number of trues
     it('should return the correct number of trues', async function() {
         // need to buy shoe first
-        await CoShoeInstance.buyShoe("nike", "nike.com", {'value': 5e17})
+        await CoShoeInstance.buyShoe("nike", "nike.com", {'from': accounts[1],'value': 5e17})
+
         // call shoessold so we can use length
-        let shoe_Sold = await CoShoeInstance.shoesSold()
+        let shoe_Sold = await CoShoeInstance.shoes(1)
         // call checkpurchases to get boolean array
         // loop through array and find all instances of true
         // increment using count variable
         let check = await CoShoeInstance.checkPurchases()
+    
         var count = 0
-        for(var i = 0; i < check.length; i++) {
+        for(var i = 0; i <= check.length; i++) {
             if(check[i] == true){
                 count++
             } 
         }
-        assert.equal(count, shoe_Sold.toNumber(), "Number of trues is not the same")
+
+        assert.equal(count, 1, "Number of trues is not the same")
     })
 
 

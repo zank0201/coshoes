@@ -12,7 +12,7 @@ contract CoShoe {
         string image;
     }
     // state variable of 0.5 ether and convert to wei
-    uint public price = 0.5 * 1e18 wei;
+    uint public price = 0.5 * 1e18 wei ;
     //  state variable shoessold which keeps number of shoes already sold
     // initialise as zero
     uint public shoesSold = 0;
@@ -28,6 +28,7 @@ contract CoShoe {
     // constructor to mint 100 coshoe tokens
     constructor () public {
         // set address of deployer to be owner
+        //  instance within shoe array
         Shoe memory shoeArray;
         
         shoeArray.owner = msg.sender;
@@ -40,7 +41,6 @@ contract CoShoe {
         
         // push instances to Shoe array
         shoes.push(shoeArray);
-        shoesSold++;
     
     }
 
@@ -50,7 +50,7 @@ contract CoShoe {
     
     // find pair of shoes that have not been sold yet
     
-    require(shoesSold > 0, "The are no shoes available.");
+    require(shoesSold > 0  || shoesSold <=100, "The are no shoes available.");
 
     // checks value of attahced function is same as price
     require(msg.value == price, "You have not given enough money.");
@@ -71,7 +71,7 @@ contract CoShoe {
     function checkPurchases() public view returns(bool[] memory) {
         //set empty boolean array of length of number of shoes sold which will check
         // will put true in index of array 
-        bool[] memory _soldarray = new bool[](shoesSold);
+        bool[] memory _soldarray = new bool[](100);
 
         for (uint i = 0; i < shoesSold; i++) {
             Shoe storage shoe = shoes[i];
